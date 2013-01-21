@@ -1,10 +1,5 @@
 Popis projektu
 
-Projekt pozostava z 3 modulov:
-	1)mi-lif - obsahuje portlety
-	2)unified_bpm_interface_modified - obsahuje persistentne entity
-	3)workflow-common
-
 Splnene poziadavky:
 
 1. skupina:
@@ -19,7 +14,7 @@ Splnene poziadavky:
 	Liferay hook
 
 Backend projektu je postaveny na Spring framework.
-Projekt mi-lif obsahuje 3 portlety:
+Projekt obsahuje 3 portlety:
 	1) ApplyForAssignment - sluzi na zobrazeni jednotlivych assignmentov.
 	2) AssignmentManager - vo view mode, zobrazuje list aktualnych assignmentov, po kliknuti je assignment
 							zobrazeny portletom ApplyForAssignment. V edit mode portletu sa vytvaraju nove assignmenty.
