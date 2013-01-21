@@ -1,0 +1,50 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<style>
+.columnAlignTop {
+	vertical-align: text-top
+}
+
+.rightAlign {
+	float: right
+}
+
+.ratingParentTable {
+	width: 100%
+}
+
+.line {
+	width: 100%;
+	height: 2px;
+	background-color: black
+}
+</style>
+</h:head>
+
+<h:body>
+	<f:view>
+		#{assignmentManagerViewController.greeting}
+		<br />
+		<h:outputText value="You're being logged into the liferay instance which has deployed the hook login counter for the:" rendered="#{assignmentManagerViewController.loggedIn}" />
+		<h:outputText value="#{assignmentManagerViewController.loginCount}" rendered="#{assignmentManagerViewController.loggedIn}" />
+		<h:form>
+			<h:panelGrid border="1"
+				columns="3">
+				<ui:repeat var="task" varStatus="status"
+					value="#{assignmentManagerViewController.tasks}">
+					<p:commandButton ajax="false"
+						action="#{assignmentManagerViewController.view(task.id)}"
+						value="#{task.title}" />
+				</ui:repeat>
+			</h:panelGrid>
+		</h:form>
+	</f:view>
+
+</h:body>
+
+</html>

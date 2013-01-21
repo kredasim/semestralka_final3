@@ -1,0 +1,106 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<style>
+.columnAlignTop {
+	vertical-align: text-top
+}
+
+.rightAlign {
+	float: right
+}
+
+.ratingParentTable {
+	width: 100%
+}
+
+.line {
+	width: 100%;
+	height: 2px;
+	background-color: black
+}
+</style>
+</h:head>
+
+<h:body>
+	<f:view>
+		<h2>#{messages.viewTask}</h2>
+		<h:form enctype="multipart/form-data" prependId="false" id="base" rendered="#{viewTaskController.task != null}">
+
+			<table border="1">
+				<thead>
+					<td>#{messages.project}</td>
+				</thead>
+				<tr>
+					<td class="columnAlignTop">#{messages.name}</td>
+					<td>#{viewTaskController.task.title}</td>
+				</tr>
+				<tr>
+					<td class="columnAlignTop">#{messages.description}</td>
+					<td>#{viewTaskController.task.description}</td>
+				</tr>
+				<tr>
+					<td class="columnAlignTop">#{messages.targets}</td>
+					<td>#{viewTaskController.task.goals}</td>
+				</tr>
+				<tr>
+					<td class="columnAlignTop">#{messages.workloadEstimation}<em>h</em></td>
+					<td>#{viewTaskController.task.workIntensity}</td>
+				</tr>
+
+				<tr>
+					<td class="columnAlignTop">#{messages.desiredOutputs}</td>
+					<td>#{viewTaskController.task.outputs}</td>
+				</tr>
+				<tr>
+					<td class="columnAlignTop">#{messages.validFrom}</td>
+					<td>#{viewTaskController.task.validFrom}</td>
+				</tr>
+				<tr>
+					<td class="columnAlignTop">#{messages.validTo}</td>
+					<td>#{viewTaskController.task.validTo}</td>
+				</tr>
+				<tr>
+					<td class="columnAlignTop">#{messages.logonDeadline}</td>
+					<td>#{viewTaskController.task.registrationEnd}</td>
+				</tr>
+				<tr>
+					<td class="columnAlignTop">#{messages.project}</td>
+					<td>#{viewTaskController.task.project.name}</td>
+				</tr>
+				<tr>
+					<td class="columnAlignTop">#{messages.nominatedSubject}</td>
+					<td>#{viewTaskController.task.subjects}</td>
+				</tr>
+				<tr>
+					<td class="columnAlignTop">#{messages.sources}</td>
+					<td>#{viewTaskController.task.sources}</td>
+				</tr>
+				<tr>
+					<td class="columnAlignTop">#{messages.attachments}</td>
+					<td><ui:repeat value="#{viewTaskController.task.attachments}"
+							var="attachment">
+							<h:panelGrid columns="1">
+                                    #{attachment.comment}
+                                    <p:commandLink
+									value="Download attachment"
+									actionListener="#{viewTaskController.downloadAttachment(attachment)}" />
+							</h:panelGrid>
+						</ui:repeat></td>
+				</tr>
+
+			</table>
+		</h:form>
+
+
+
+
+	</f:view>
+
+</h:body>
+
+</html>

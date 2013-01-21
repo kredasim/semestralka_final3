@@ -1,0 +1,112 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<style>
+.columnAlignTop {
+	vertical-align: text-top
+}
+
+.rightAlign {
+	float: right
+}
+
+.ratingParentTable {
+	width: 100%
+}
+
+.line {
+	width: 100%;
+	height: 2px;
+	background-color: black
+}
+</style>
+</h:head>
+
+<h:body>
+
+	<f:view>
+		<f:metadata>
+			<f:event listener="#{assignmentManager.init()}" type="preRenderView" />
+		</f:metadata>
+		<h2>#{messages.viewTask}</h2>
+		<h:form id="base">
+			#{messages.project}
+			
+			<h:panelGrid columns="3">
+				#{messages.name}
+				<p:inputText id="name" value="#{assignmentManager.dto.title}"
+					required="true">
+					<f:validateLength minimum="2" />
+				</p:inputText>
+				<p:message for="name" />
+
+				#{messages.description}
+				<p:inputText id="description" value="#{assignmentManager.dto.description}">
+					<f:validateLength minimum="2" />
+				</p:inputText>
+				<p:message for="description" />
+
+				#{messages.targets}
+				<p:inputText id="targets" value="#{assignmentManager.dto.goals}">
+					<f:validateLength minimum="2" />
+				</p:inputText>
+				<p:message for="targets" />
+					
+				#{messages.workloadEstimation}<em>h</em>
+				<p:inputText id="workIntesity" value="#{assignmentManager.dto.workIntensity}">
+					<f:validateLongRange minimum="1" />
+				</p:inputText>
+				<p:message for="workIntesity" />
+					
+				#{messages.desiredOutputs}
+				<p:inputText id="outputs" value="#{assignmentManager.dto.outputs}">
+					<f:validateLength minimum="2" />
+				</p:inputText>
+				<p:message for="outputs" />
+					
+				#{messages.validFrom}
+				<p:calendar id="validFrom" value="#{assignmentManager.dto.validFrom}"
+					required="true" />
+				<p:message for="validFrom" />
+
+				#{messages.validTo}
+				<p:calendar id="validTo" value="#{assignmentManager.dto.validTo}"
+					required="true" />
+				<p:message for="validTo" />
+					
+				#{messages.logonDeadline}
+				<p:calendar id="registrationEnd" value="#{assignmentManager.dto.registrationEnd}"
+					required="true" />
+				<p:message for="registrationEnd" />
+					
+				#{messages.project}
+				<p:inputText id="projectName" value="#{assignmentManager.dto.project.name}">
+					<f:validateLength minimum="2" />
+				</p:inputText>
+				<p:message for="projectName" />
+					
+				#{messages.nominatedSubject}
+				<p:inputText id="subjects" value="#{assignmentManager.dto.subjects}">
+					<f:validateLength minimum="2" />
+				</p:inputText>
+				<p:message for="subjects" />
+					
+				#{messages.sources}
+				<p:inputText id="sources" value="#{assignmentManager.dto.sources}">
+					<f:validateLength minimum="2" />
+				</p:inputText>
+				<p:message for="sources" />
+
+			</h:panelGrid>
+			<p:commandButton action="#{assignmentManager.save}" value="Save"
+				ajax="false" />
+		</h:form>
+	</f:view>
+
+</h:body>
+
+</html>
