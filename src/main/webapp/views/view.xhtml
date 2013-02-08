@@ -80,19 +80,6 @@
 					<td class="columnAlignTop">#{messages.sources}</td>
 					<td>#{viewTaskController.task.sources}</td>
 				</tr>
-				<tr>
-					<td class="columnAlignTop">#{messages.attachments}</td>
-					<td><ui:repeat value="#{viewTaskController.task.attachments}"
-							var="attachment">
-							<h:panelGrid columns="1">
-                                    #{attachment.comment}
-                                    <p:commandLink
-									value="Download attachment"
-									actionListener="#{viewTaskController.downloadAttachment(attachment)}" />
-							</h:panelGrid>
-						</ui:repeat></td>
-				</tr>
-
 			</table>
 		</h:form>
 

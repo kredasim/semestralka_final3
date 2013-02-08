@@ -10,12 +10,32 @@ package cz.cvut.fit.bpm.api.dto;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * @author Miroslav Ligas <miroslav.ligas@ibacz.eu>
  */
-public class ProjectDto extends CodebookEntity implements Serializable {
-    private String name;
+@Entity
+public class ProjectDto implements Serializable {
+	private String name;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+	
+    public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
+    
     public String getName() {
         return name;
     }

@@ -5,21 +5,21 @@ package cz.cvut.applyforassignmentportlet.service;
 
 import java.util.List;
 
-import javax.faces.bean.ManagedProperty;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import cz.cvut.applyforassignmentportlet.dao.TaskDtoGenericDao;
 import cz.cvut.fit.bpm.api.dto.TaskDto;
-import cz.cvut.fit.bpm.api.service.TaskDtoService;
 
 /**
  * @author Simeon Kredatus
  * 
  */
-public class PersistentTaskDtoService implements TaskDtoService,
-		PersistentDtoService<TaskDto> {
+@Service("dummyTaskDtoService")
+@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+public class PersistentTaskDtoService implements PersistentDtoService<TaskDto> {
 
 	private TaskDtoGenericDao taskDtoDao;
 
@@ -27,19 +27,8 @@ public class PersistentTaskDtoService implements TaskDtoService,
 	 * {@inheritDoc}
 	 */
 	@Override
-	@Transactional
 	public TaskDto getById(Long id) {
 		TaskDto ret = taskDtoDao.findById(id);
-		//avoid lazy loading exception
-		if (ret.getAttachments() != null) {
-			ret.getAttachments().size();
-		}
-		if (ret.getCourse() != null) {
-			ret.getCourse().size();
-		}
-		if (ret.getRoles() != null) {
-			ret.getRoles().size();
-		}
 		return ret;
 	}
 
@@ -47,7 +36,7 @@ public class PersistentTaskDtoService implements TaskDtoService,
 	 * {@inheritDoc}
 	 */
 	@Override
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void save(TaskDto object) {
 		taskDtoDao.save(object);
 	}
@@ -56,7 +45,6 @@ public class PersistentTaskDtoService implements TaskDtoService,
 	 * {@inheritDoc}
 	 */
 	@Override
-	@Transactional
 	public List<TaskDto> getAll() {
 		return taskDtoDao.getAll();
 	}

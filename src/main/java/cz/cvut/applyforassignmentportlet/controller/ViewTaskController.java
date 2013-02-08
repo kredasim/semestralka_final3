@@ -7,7 +7,6 @@ package cz.cvut.applyforassignmentportlet.controller;
 import java.io.IOException;
 import java.io.Serializable;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -18,17 +17,15 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.util.PortalUtil;
 
+import cz.cvut.applyforassignmentportlet.service.PersistentDtoService;
 import cz.cvut.fit.bpm.api.dto.AttachmentDto;
-import cz.cvut.fit.bpm.api.dto.SkillDto;
 import cz.cvut.fit.bpm.api.dto.TaskDto;
-import cz.cvut.fit.bpm.api.dto.UnitRoleDto;
-import cz.cvut.fit.bpm.api.service.TaskDtoService;
-import cz.cvut.fit.bpm.common.PortletCommonUtils;
 import cz.cvut.fit.bpm.common.WorkflowService;
-//import cz.cvut.fit.industry.api.WorkflowConstants;
 import cz.cvut.portlet.common.CommonConstants;
+//import cz.cvut.fit.industry.api.WorkflowConstants;
 
 /**
  * Controller for view page of this portlet.
@@ -52,12 +49,8 @@ public class ViewTaskController implements Serializable {
     private WorkflowService workflowService;
     
     @ManagedProperty("#{dummyTaskDtoService}")
-    private TaskDtoService taskDtoService;
+    private PersistentDtoService<TaskDto> taskDtoService;
 
-    @PostConstruct
-    public void init() {
-
-    }
 
     /**
      * TODO finish after the method of parameter passing will be known.
@@ -74,16 +67,6 @@ public class ViewTaskController implements Serializable {
     }
     
     
-    public int getRoleSkillLevel(String roleName, String skillName) {
-    	UnitRoleDto unitRoleDto = PortletCommonUtils.getUnitRoleByName(getTask().getRoles(), roleName);
-    	for (SkillDto skill : unitRoleDto.getSkillDtoList()) {
-    		if (skill.getType().equals(skillName)) {
-    			return skill.getRating();
-    		}
-    	}
-    	return 0;
-    }
-
     public void redirectHome() throws IOException {
     	try {
     		FacesContext.getCurrentInstance().getExternalContext().redirect(PortalUtil.getHomeURL((HttpServletRequest) FacesContext.getCurrentInstance()
@@ -124,11 +107,17 @@ public class ViewTaskController implements Serializable {
 		this.workflowService = workflowService;
 	}
 
-	public TaskDtoService getTaskDtoService() {
+
+	public PersistentDtoService<TaskDto> getTaskDtoService() {
 		return taskDtoService;
 	}
 
-	public void setTaskDtoService(TaskDtoService taskDtoService) {
+
+	public void setTaskDtoService(PersistentDtoService<TaskDto> taskDtoService) {
 		this.taskDtoService = taskDtoService;
 	}
+	
+	
+
+	
 }

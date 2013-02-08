@@ -3,7 +3,6 @@
  */
 package cz.cvut.applyforassignmentportlet.controller;
 
-import javax.el.ELContext;
 import javax.faces.context.FacesContext;
 import javax.portlet.faces.BridgePublicRenderParameterHandler;
 

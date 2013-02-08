@@ -16,12 +16,15 @@ import javax.persistence.PersistenceContext;
  */
 public class HibernateGenericDao<T> {
 
+	private EntityManager entityManager;
+	
 	@PersistenceContext
-	protected EntityManager entityManager;
-
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
+	
 	public void save(T object) {
 		entityManager.persist(object);
-
 	}
 
 	@SuppressWarnings("unchecked")
@@ -39,4 +42,5 @@ public class HibernateGenericDao<T> {
 		return entityManager.createQuery("Select a from TaskDto a", clazz).getResultList();
 	}
 
+	
 }

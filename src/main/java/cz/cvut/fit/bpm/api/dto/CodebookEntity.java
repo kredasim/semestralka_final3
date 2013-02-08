@@ -3,6 +3,10 @@
  */
 package cz.cvut.fit.bpm.api.dto;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
  * 
  * Parent for all persistent entities.
@@ -11,7 +15,7 @@ package cz.cvut.fit.bpm.api.dto;
  */
 public class CodebookEntity {
 
-	private Long id;
+	protected Long id;
 
 	public Long getId() {
 		return id;
